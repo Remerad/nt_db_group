@@ -57,12 +57,12 @@ WHERE Track.duration = (SELECT MIN(DURATION) FROM Track)
 ORDER BY Artist.id;
 
 --9. название альбомов, содержащих наименьшее количество треков.
-SELECT COUNT(Track.ID),  from Album
+SELECT Album.Name from Album
 JOIN Track on Album.ID = Track.AlbumID
 GROUP BY Album.ID
 HAVING COUNT(Track.ID) = (
 	SELECT COUNT(Track.ID) as cn from Album
 	JOIN Track on Album.ID = Track.AlbumID
 	GROUP BY Album.ID
-	ORDER BY cn DESC
+	ORDER BY cn
 	LIMIT 1);
